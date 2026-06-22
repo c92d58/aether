@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages & Cloudflare
 
 on:
   push:
@@ -37,3 +37,6 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+      - name: Trigger Cloudflare Pages deploy
+        run: |
+          curl -s -X POST "https://api.cloudflare.com/client/v4/accounts/2c3d1b0d2d2c1e839fafb02be42562d4/pages/projects/aether/deploy_hooks/04fa47e2-3aea-4ec0-952c-fc4c41fe1b3a/trigger"
